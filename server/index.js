@@ -15,10 +15,7 @@ app.use(express.json());  //req.body
 app.post("/todos",(req,res)=>{
     try{
         const {description} =req.body;
-        const newTodo = pool.query(
-            "INSERT INTO todo(description) VALUES($1) RETURNING *",
-            [description]
-        );
+        const newTodo = pool.query("INSERT INTO todo(description) VALUES($1) RETURNING *",[description]);
         res.json(newTodo.rows[0]);
 
     }catch(err){
